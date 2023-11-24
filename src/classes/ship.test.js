@@ -1,9 +1,4 @@
-//test length
-//test is hit
-//test is sunk
-
 const CreateShip = require("./ship.js");
-// import CreateShip from "./classes/ship.js";
 
 test("does new CreateShip create a ship of length entered ", () => {
   expect(new CreateShip(3).length).toBe(3);
@@ -25,12 +20,23 @@ test("toggleSunk function should toggle the sunk property", () => {
 });
 
 test("numberOfTimesHit function should increase hit value by value entered", () => {
-  const newShip = new CreateShip(6, false, 0);
-  expect(newShip.hit).toBe(0);
+  const ship1 = new CreateShip(6, false, 0);
+  expect(ship1.hit).toBe(0);
 
-  newShip.numberOfTimesHit(1);
-  expect(newShip.hit).toBe(1);
+  ship1.numberOfTimesHit(1);
+  expect(ship1.hit).toBe(1);
 
-  newShip.numberOfTimesHit(1);
-  expect(newShip.hit).toBe(2);
+  ship1.numberOfTimesHit(1);
+  expect(ship1.hit).toBe(2);
+});
+
+test("numberOfTimesHit function should toggleSunk function when number of hits is greater than or equal to ship length", () => {
+  const ship2 = new CreateShip(6, false, 0);
+  expect(ship2.sunk).toBe(false);
+
+  ship2.numberOfTimesHit(1);
+  expect(ship2.sunk).toBe(false);
+
+  ship2.numberOfTimesHit(5);
+  expect(ship2.sunk).toBe(true);
 });

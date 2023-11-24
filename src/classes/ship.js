@@ -8,7 +8,10 @@ class CreateShip {
     this.sunk = !this.sunk;
   }
   numberOfTimesHit(input) {
-    this.hit = this.hit + input;
+    this.hit += input;
+    if (this.hit >= this.length) {
+      this.sunk = true;
+    }
   }
 }
 
