@@ -1,12 +1,14 @@
 class CreateShip {
-  constructor(length, sunk = false) {
+  constructor(length, sunk = false, hit) {
     this.length = length;
     this.sunk = sunk;
-    console.log(sunk);
+    this.hit = hit;
   }
   toggleSunk() {
-    console.log("toggle fired");
     this.sunk = !this.sunk;
+  }
+  numberOfTimesHit(input) {
+    this.hit = this.hit + input;
   }
 }
 
