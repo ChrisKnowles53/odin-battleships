@@ -17,12 +17,14 @@ class Gameboard {
   convertRowLabel(row) {
     return String.fromCharCode(65 + row);
   }
+  setShipStartPosition(row, column, value) {
+    // think if i limit input to between 1 and 10 i dont need this check
+    //💥💥 This on;y works with row and column as digits starting at 0 for first column
+    if (row < this.size && column < this.size) {
+      this.board[row][column] = value;
+    }
+  }
 }
 // Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
-// need to change board to letter by number instead of deafult array which is number by number - to do this need to convert a digit to a letter 💭 ceaser cipher ASCI code caps are 95? onwards
-
-//if (char.match(/[A-Z]/)) {
-// let code = char.charCodeAt();
-// let shifted = ((((code - 65 + shift) % 26) + 26) % 26) + 65;
 
 module.exports = Gameboard;
