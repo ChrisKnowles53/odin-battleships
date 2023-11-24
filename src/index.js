@@ -13,3 +13,8 @@ console.log(firstShip.hit, firstShip.sunk);
 
 let board = new Gameboard();
 console.log(board);
+
+let row = 0; // expect A as the answer
+console.log(String.fromCharCode(65 + row));
+let row2 = 1; // remeber arrays start at 0 expect B as the answer
+console.log(String.fromCharCode(65 + row2));
