@@ -4,12 +4,18 @@
     --blue: #007bff;
     --offBlack: #333;
     --white: #ffffff;
+    --red: #FF0000;
 }
 
 body {
     background-color: var(--offBlack);
+    color: var(--green )
 }
 
 h1 {
     color: var(--yellow);
+}
+
+#controls-container {
+    color: var(--red);
 }
