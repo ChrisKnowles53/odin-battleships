@@ -1,0 +1,15 @@
+:root {
+    --green: #01b136; 
+    --yellow: #d9a405;
+    --blue: #007bff;
+    --offBlack: #333;
+    --white: #ffffff;
+}
+
+body {
+    background-color: var(--offBlack);
+}
+
+h1 {
+    color: var(--yellow);
+}
