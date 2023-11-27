@@ -2,14 +2,14 @@ class CreateShip {
   constructor(length, sunk = false, hit) {
     this.length = length;
     this.sunk = sunk;
-    this.hit = hit;
+    this.numberOfHits = hit;
   }
   toggleSunk() {
     this.sunk = !this.sunk;
   }
-  numberOfTimesHit(input) {
-    this.hit += input;
-    if (this.hit >= this.length) {
+  shipHit() {
+    this.numberOfHits++;
+    if (this.numberOfHits >= this.length) {
       this.sunk = true;
     }
   }

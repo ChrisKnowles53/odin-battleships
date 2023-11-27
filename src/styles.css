@@ -19,3 +19,14 @@ h1 {
 #controls-container {
     color: var(--red);
 }
+#main-controller {
+    display: flex;
+}
+#gameboard-container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+#player1-gameboard, #player2-gameboard {
+    padding: 10px;
+}
