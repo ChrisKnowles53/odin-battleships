@@ -31,7 +31,10 @@ test("shipHit function should increase hit value by value entered", () => {
 });
 
 test("shipHit function should toggleSunk function when number of hits is greater than or equal to ship length", () => {
-  const ship2 = new CreateShip(6, false, 0);
+  const ship2 = new CreateShip(3, false, 0);
+  expect(ship2.sunk).toBe(false);
+
+  ship2.shipHit();
   expect(ship2.sunk).toBe(false);
 
   ship2.shipHit();
