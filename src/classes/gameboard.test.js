@@ -1,20 +1,25 @@
 const CreateShip = require("./ship.js");
 const Gameboard = require("./gameboard.js");
 
-// test("intialiseBoard creates an array of 10 by 10", () => {
-//   const gameboard = new Gameboard();
-//   expect(gameboard.board.length).toEqual(10);
-//   gameboard.board.forEach((row) => {
-//     expect(row.length).toBe(10);
-//   });
-// });
-
 test("placeShip function", () => {
   const ship1 = new CreateShip(1);
   const board = new Gameboard();
-  board.placeShip("a1", ship1);
+  board.placeShip(["a1"], ship1);
   expect(board.board.a1).toBe(ship1);
 });
+
+test("placeship across 2 cells", () => {
+  const ship2 = new CreateShip(2);
+  const board2 = new Gameboard();
+  const locations = ["a3", "a4"];
+  board2.placeShip(locations, ship2);
+  expect(board2.board.a3).toBe(ship2);
+  expect(board2.board.a4).toBe(ship2);
+});
+
+// whats the next test
+
+// red green refactor - simple test fail write the code to pass write the next test fail and code to pass then refactor
 
 // ✨✨✨✨ write a test for placement of a ship on the board
 // is there another ship on the board - ie is the cell empty
@@ -26,17 +31,3 @@ test("placeShip function", () => {
 //// Carrier = C, Battleship = B, Destroyer = D, Submarine = S, PatrolBoat = P
 //// hit: mark with red X
 //// clicked but not a ship present: M for Miss
-
-// test("board is a 2D array", () => {
-//   const gameboard = new Gameboard();
-//   expect(Array.isArray(gameboard.board)).toBe(true);
-//   gameboard.board.forEach((row) => {
-//     expect(Array.isArray(row)).toBe(true);
-//   });
-// });
-
-// test("that the marker Start appears on the board in the desired start location", () => {
-//   const gameboard1 = new Gameboard();
-//   gameboard1.setShipStartPosition(1, 1, "Start");
-//   expect(gameboard1.board[1][1]).toBe("Start");
-// });

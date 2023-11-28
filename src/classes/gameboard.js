@@ -3,10 +3,15 @@ class Gameboard {
   constructor() {
     this.board = {};
   }
-  placeShip(location, ship) {
-    this.board[location] = ship;
+  placeShip(locations, ship) {
+    locations.forEach((location) => {
+      this.board[location] = ship;
+    });
   }
 }
+
+module.exports = Gameboard;
+
 //   initialiseBoard(size) {
 //     let board = [];
 //     for (let row = 0; row < size; row++) {
@@ -28,10 +33,3 @@ class Gameboard {
 //       this.board[row][column] = value;
 //     }
 //   }
-
-module.exports = Gameboard;
-
-// Odin said: Gameboards should be able to place ships at specific coordinates by calling the ship factory function.
-// i dont believe the ship class should place ships i believe this should be in the game.js
-
-const board2 = { a1: null, a2: null };
