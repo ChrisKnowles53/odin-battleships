@@ -53,3 +53,12 @@ test("that if there is any partial overlap the whole ship is not placed", () => 
   expect(gameboard.board.a3).toBe(ship1);
   expect(gameboard.board.a4).toBe(undefined);
 });
+//Gameboards should have a receiveAttack function that takes a pair of coordinates, determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, or records the coordinates of the missed shot.
+
+test("receiveAttack takes co-ordinates and checks board to see if it hit ship", () => {
+  const ship1 = new CreateShip(3);
+  const gameboard = new Gameboard();
+  const location = ["a1", "a2", "a3"];
+  gameboard.placeShip(location, ship1);
+  expect(gameboard.receiveAttack(["a2"])).toBe(true);
+});

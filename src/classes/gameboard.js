@@ -13,6 +13,14 @@ class Gameboard {
       });
     }
   }
+  receiveAttack(coords) {
+    if (this.board[coords] === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+    // compare coords to gameboard and see if ship present
+  }
 }
 
 module.exports = Gameboard;
