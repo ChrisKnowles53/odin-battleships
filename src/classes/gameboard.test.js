@@ -98,3 +98,18 @@ test("receiveAttack method records the coordinate of the missed shot", () => {
   gameboard.receiveAttack(attackCoordinate2);
   expect(gameboard.missedShots).toContain(attackCoordinate2);
 });
+
+// Gameboards should be able to report whether or not all of their ships have been sunk.
+// break this down
+// first the gameboard needs to list what ships have been placed
+// then it can iterate through the list to check if isSunk is true
+test("gameboard keeps track of all ships placed", () => {
+  const ship1 = new CreateShip(1);
+  const ship2 = new CreateShip(1);
+  const location1 = ["a1"];
+  const location2 = ["b1"];
+  const gameboard = new Gameboard();
+  gameboard.placeShip(location1, ship1);
+  gameboard.placeShip(location2, ship2);
+  expect(gameboard.ships).toEqual([ship1, ship2]);
+});
