@@ -2,6 +2,7 @@ const BOARD_SIZE = 10;
 class Gameboard {
   constructor() {
     this.board = {};
+    this.missedShots = [];
   }
   placeShip(locations, ship) {
     const canPlaceShip = locations.every((location) => {
@@ -16,6 +17,7 @@ class Gameboard {
   receiveAttack(coordinate) {
     const cell = this.board[coordinate];
     if (cell === undefined) {
+      this.missedShots.push(coordinate);
       return false;
     } else {
       cell.shipHit();
