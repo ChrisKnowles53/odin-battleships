@@ -42,7 +42,7 @@ test("player1 makes an attack on player2 gamenboard: check if coordinates have b
   player2Gameboard.placeShip(["b1"], ship2);
   player1.attack("b1");
   expect(player1.shotsTaken).toContain("b1");
-  expect(player1.attack("b1")).tobe("choose new coordinates");
+  expect(player1.attack("b1")).toBe("choose new coordinates");
 });
 
 xtest("player1 makes an attack on player2 gameboard", () => {
