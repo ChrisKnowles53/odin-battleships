@@ -45,7 +45,7 @@ test("player1 makes an attack on player2 gamenboard: check if coordinates have b
   expect(player1.attack("b1")).toBe("choose new coordinates");
 });
 
-xtest("player1 makes an attack on player2 gameboard", () => {
+test("player1 makes an attack on player2 gameboard", () => {
   const player1 = new CreatePlayer("player1");
   const player2 = new CreatePlayer("player2");
   const player1Gameboard = new Gameboard();
