@@ -5,7 +5,6 @@ class CreatePlayer {
   }
   attack(coordinates, player2Gameboard) {
     this.shotsTaken.push(coordinates);
-    // player2Gameboard.receiveAttack(coordinates);
     return true;
   }
 }
