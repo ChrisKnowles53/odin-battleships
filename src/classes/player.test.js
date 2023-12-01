@@ -10,15 +10,6 @@ const CreateShip = require("./ship.js");
 const Gameboard = require("./gameboard.js");
 const CreatePlayer = require("./player.js");
 
-beforeEach(() => {
-  const player1Gameboard = new Gameboard();
-  const player2Gameboard = new Gameboard();
-  const ship1 = new CreateShip(1);
-  const ship2 = new CreateShip(1);
-  player1Gameboard.placeShip(["a1"], ship1);
-  player2Gameboard.placeShip(["b1"], ship2);
-});
-
 test("can a player class be created", () => {
   const playerObject = { name: undefined, shotsTaken: [] };
   expect(new CreatePlayer()).toMatchObject(playerObject);
@@ -40,7 +31,15 @@ test("player class has a function called attack which updates the shotsTaken [] 
   expect(player1.shotsTaken).toContain(attackCoordinate);
 });
 
-xtest("player1 makes an attack on player2 gameboard", () => {
-  // paused here because i realised first step is player1 specifies coordinates
-  // thinking player1.attack can invoke the recieveAttack function
+test("player1 makes an attack on player2 gameboard", () => {
+  const player1 = new CreatePlayer("player1");
+  const player2 = new CreatePlayer("player2");
+  const player1Gameboard = new Gameboard();
+  const player2Gameboard = new Gameboard();
+  const ship1 = new CreateShip(1);
+  const ship2 = new CreateShip(1);
+  player1Gameboard.placeShip(["a1"], ship1);
+  player2Gameboard.placeShip(["b1"], ship2);
+  player1.attack("b1", player2Gameboard);
+  expect(player2Gameboard.areAllShipsSunk()).toBe(true);
 });

@@ -3,8 +3,9 @@ class CreatePlayer {
     this.name = player;
     this.shotsTaken = [];
   }
-  attack(coordinates) {
+  attack(coordinates, player2Gameboard) {
     this.shotsTaken.push(coordinates);
+    // player2Gameboard.receiveAttack(coordinates);
     return true;
   }
 }
