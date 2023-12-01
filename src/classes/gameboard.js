@@ -33,6 +33,8 @@ class Gameboard {
     });
     if (allShipsSunk) {
       return true;
+    } else {
+      return false;
     }
   }
 }

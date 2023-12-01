@@ -147,3 +147,28 @@ test("gameboard reports true if all ships are sunk", () => {
   gameboard.receiveAttack("b3");
   expect(gameboard.areAllShipsSunk()).toBe(true);
 });
+
+test("gameboard reports false if all ships are NOT sunk", () => {
+  const ship1 = new CreateShip(1);
+  const ship2 = new CreateShip(1);
+  const location1 = ["a1"];
+  const location2 = ["b1"];
+  const gameboard = new Gameboard();
+  gameboard.placeShip(location1, ship1);
+  gameboard.placeShip(location2, ship2);
+  gameboard.receiveAttack("a1");
+  expect(gameboard.areAllShipsSunk()).toBe(false);
+});
+test("gameboard reports false if all ships are NOT sunk", () => {
+  const ship1 = new CreateShip(2);
+  const ship2 = new CreateShip(3);
+  const location1 = ["a1", "a2"];
+  const location2 = ["b1", "b2", "b3"];
+  const gameboard = new Gameboard();
+  gameboard.placeShip(location1, ship1);
+  gameboard.placeShip(location2, ship2);
+  gameboard.receiveAttack("a1");
+  gameboard.receiveAttack("b1");
+  gameboard.receiveAttack("b2");
+  expect(gameboard.areAllShipsSunk()).toBe(false);
+});
