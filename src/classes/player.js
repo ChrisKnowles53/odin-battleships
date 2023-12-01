@@ -3,7 +3,10 @@ class CreatePlayer {
     this.name = player;
     this.shotsTaken = [];
   }
-  attack(coordinates, player2Gameboard) {
+  attack(coordinates) {
+    if (this.shotsTaken.includes(coordinates)) {
+      return "choose new coordinates";
+    }
     this.shotsTaken.push(coordinates);
     return true;
   }

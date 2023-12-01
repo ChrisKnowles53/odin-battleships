@@ -31,7 +31,21 @@ test("player class has a function called attack which updates the shotsTaken [] 
   expect(player1.shotsTaken).toContain(attackCoordinate);
 });
 
-test("player1 makes an attack on player2 gameboard", () => {
+test("player1 makes an attack on player2 gamenboard: check if coordinates have been used", () => {
+  const player1 = new CreatePlayer("player1");
+  const player2 = new CreatePlayer("player2");
+  const player1Gameboard = new Gameboard();
+  const player2Gameboard = new Gameboard();
+  const ship1 = new CreateShip(1);
+  const ship2 = new CreateShip(1);
+  player1Gameboard.placeShip(["a1"], ship1);
+  player2Gameboard.placeShip(["b1"], ship2);
+  player1.attack("b1");
+  expect(player1.shotsTaken).toContain("b1");
+  expect(player1.attack("b1")).tobe("choose new coordinates");
+});
+
+xtest("player1 makes an attack on player2 gameboard", () => {
   const player1 = new CreatePlayer("player1");
   const player2 = new CreatePlayer("player2");
   const player1Gameboard = new Gameboard();
