@@ -34,9 +34,6 @@ class Gameboard {
     if (allShipsSunk) {
       return true;
     }
-    // this.ships.forEach and check if each ship.sunk =true
-    // should this be an ships.every to check that every shup is sunk
-    //return true
   }
 }
 
