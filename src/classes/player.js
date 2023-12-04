@@ -133,8 +133,13 @@ class CreatePlayer {
       maxArrayNumber
     );
     const computerRandomMove = this.validMoveArray[randomInteger];
-    this.attack(computerRandomMove);
-    return computerRandomMove; //true (true is only needed to pass recursive test);
+
+    if (this.shotsTaken.includes(computerRandomMove)) {
+      return this.randomMove();
+    } else {
+      this.attack(computerRandomMove);
+      return computerRandomMove; //true (true is only needed to pass recursive test);
+    }
   }
   getRandomIntegerNumber(min, max) {
     min = Math.ceil(min);
