@@ -122,6 +122,7 @@ test("computer randomMove generates a new coordinate each time it is invoked", (
   player1Gameboard.receiveAttack(secondRandomComputerMove);
 
   expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(2);
+  expect(computer.shotsTaken.length).toBe(2);
   expect(randomComputerMove).not.toBe(secondRandomComputerMove);
 
   jest.restoreAllMocks();
@@ -140,5 +141,18 @@ xtest("randomMove function re-generates automatically if the co-ordinate has alr
     .spyOn(computer, "getRandomIntegerValue")
     .mockReturnValue(42)
     .mockReturnValue(42)
-    .mockReturnValue(36);
+    .mockReturnValue(56); // 42 is e3 and 56 f7
+
+  player1Gameboard.placeShip(["a1"], ship1);
+
+  const randomComputerMove = computer.randomMove();
+  player1Gameboard.receiveAttack(randomComputerMove);
+
+  const secondRandomComputerMove = computer.randomMove();
+  player1Gameboard.receiveAttack(secondRandomComputerMove);
+
+  expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(3); // i only call it twice above but expect the function to call itself beacuse it has generated the same number 42
+  expect(randomComputerMove).not.toBe(secondRandomComputerMove);
+
+  jest.restoreAllMocks();
 });
