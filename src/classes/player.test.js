@@ -57,3 +57,27 @@ test("player1 makes an attack on player2 gameboard", () => {
   player1.attack("b1", player2Gameboard);
   expect(player2Gameboard.areAllShipsSunk()).toBe(true);
 });
+test("player2 makes an attack on player1 gameboard", () => {
+  const player1 = new CreatePlayer("player1");
+  const player2 = new CreatePlayer("player2");
+  const player1Gameboard = new Gameboard();
+  const player2Gameboard = new Gameboard();
+  const ship1 = new CreateShip(1);
+  const ship2 = new CreateShip(1);
+  player1Gameboard.placeShip(["a1"], ship1);
+  player2Gameboard.placeShip(["b1"], ship2);
+  player2.attack("a1", player1Gameboard);
+  expect(player1Gameboard.areAllShipsSunk()).toBe(true);
+});
+test("player1 makes an attack on player2 gameboard and does NOT sink the ship", () => {
+  const player1 = new CreatePlayer("player1");
+  const player2 = new CreatePlayer("player2");
+  const player1Gameboard = new Gameboard();
+  const player2Gameboard = new Gameboard();
+  const ship1 = new CreateShip(2);
+  const ship2 = new CreateShip(3);
+  player1Gameboard.placeShip(["a1", "a2"], ship1);
+  player2Gameboard.placeShip(["b1", "b2", "b3"], ship2);
+  player1.attack("b1", player1Gameboard);
+  expect(player1Gameboard.areAllShipsSunk()).toBe(false);
+});

@@ -4,7 +4,7 @@ class CreatePlayer {
     this.shotsTaken = [];
   }
 
-  // its late Friday and this smells but passes all the recursive test and the last test of player1 attacks player2.
+  // its late Friday and this code smells but passes all the recursive tests and the last test of player1 attacks player2.
   // 💥 perhaps fresh eyes will refactor this
   attack(coordinates, opponentGameboard) {
     if (this.shotsTaken.includes(coordinates)) {
