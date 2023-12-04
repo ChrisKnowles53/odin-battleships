@@ -95,9 +95,24 @@ test("computer attacks player1 with a random move", () => {
   const player1Gameboard = new Gameboard();
   const computerGameboard = new Gameboard();
   const ship1 = new CreateShip(1);
-  const computerRandomMove = computer.randomMove();
+  const randomComputerMove = computer.randomMove();
   player1Gameboard.placeShip(["a1"], ship1);
-  expect(computer.shotsTaken).toContain(computerRandomMove);
+  expect(computer.shotsTaken).toContain(randomComputerMove);
 });
 
-xtest("computer randomMove re-generates if coordinates have already be used", () => {});
+xtest("computer randomMove generates a new coordinate each time it is invoked", () => {
+  const player1 = new CreatePlayer("player1");
+  const computer = new CreatePlayer("computer");
+  const player1Gameboard = new Gameboard();
+  const computerGameboard = new Gameboard();
+  const ship1 = new CreateShip(1);
+  const randomComputerMove = computerGameboard.randomMove();
+  player1Gameboard.placeShip(["a1"], ship1);
+  player1Gameboard.receiveAttack(randomComputerMove);
+
+  const secondRandomComputerMove = computerGameboard.randomMove();
+  player1Gameboard.receiveAttack(secondRandomComputerMove);
+  expect(player1Gameboard.receiveAttack()).toHaveBeenCalledTimes(2);
+  expect(computerGameboard.shotsTaken.length).toBe(2);
+  expect(randomComputerMove).not.toBe(secondRandomComputerMove);
+});
