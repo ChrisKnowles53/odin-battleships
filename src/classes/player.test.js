@@ -100,19 +100,45 @@ test("computer attacks player1 with a random move", () => {
   expect(computer.shotsTaken).toContain(randomComputerMove);
 });
 
-xtest("computer randomMove generates a new coordinate each time it is invoked", () => {
+test("computer randomMove generates a new coordinate each time it is invoked", () => {
   const player1 = new CreatePlayer("player1");
   const computer = new CreatePlayer("computer");
   const player1Gameboard = new Gameboard();
   const computerGameboard = new Gameboard();
   const ship1 = new CreateShip(1);
-  const randomComputerMove = computerGameboard.randomMove();
+
+  //using spy to overwrite the randomInteger Value 1st:42, 2nd:36 - so i can check 2 different shots are not on the ship
+  jest
+    .spyOn(computer, "getRandomIntegerNumber")
+    .mockReturnValueOnce(42)
+    .mockReturnValueOnce(56); // 42 is e3 and 56 f7
+
   player1Gameboard.placeShip(["a1"], ship1);
+
+  const randomComputerMove = computer.randomMove();
   player1Gameboard.receiveAttack(randomComputerMove);
 
-  const secondRandomComputerMove = computerGameboard.randomMove();
+  const secondRandomComputerMove = computer.randomMove();
   player1Gameboard.receiveAttack(secondRandomComputerMove);
-  expect(player1Gameboard.receiveAttack()).toHaveBeenCalledTimes(2);
-  expect(computerGameboard.shotsTaken.length).toBe(2);
+
+  expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(2);
   expect(randomComputerMove).not.toBe(secondRandomComputerMove);
+
+  jest.restoreAllMocks();
+});
+
+//so now the tricky one
+xtest("randomMove function re-generates automatically if the co-ordinate has already been used", () => {
+  const player1 = new CreatePlayer("player1");
+  const computer = new CreatePlayer("computer");
+  const player1Gameboard = new Gameboard();
+  const computerGameboard = new Gameboard();
+  const ship1 = new CreateShip(1);
+
+  //using spy to overwrite the randomInteger Value 1st:42, 2nd:42, 3rd:36 - wiht luck it will cause the random move to loop until the 3rd value is entered so i can use toHaveBeenCalled(3) as the matcher
+  jest
+    .spyOn(computer, "getRandomIntegerValue")
+    .mockReturnValue(42)
+    .mockReturnValue(42)
+    .mockReturnValue(36);
 });

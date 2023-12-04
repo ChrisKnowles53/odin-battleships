@@ -7,4 +7,4 @@ const computer = new CreatePlayer("computer");
 console.log(computer.getRandomIntegerNumber(1, 100));
 console.log(computer.getRandomIntegerNumber(1, 100));
 
-console.log(computer.randomMove());
+console.log(computer.validMoveArray[20]);
