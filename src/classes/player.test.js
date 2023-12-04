@@ -135,15 +135,31 @@ test("randomMove function re-generates automatically if the co-ordinate has alre
 
   player1Gameboard.placeShip(["a1"], ship1);
 
-  const randomComputerMove = computer.randomMove();
-  player1Gameboard.receiveAttack(randomComputerMove);
+  const randomComputerMove = computer.randomMove(player1Gameboard);
 
-  const secondRandomComputerMove = computer.randomMove();
-  player1Gameboard.receiveAttack(secondRandomComputerMove);
+  const secondRandomComputerMove = computer.randomMove(player1Gameboard);
 
   expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(3); // i only call it twice above but expect the function to call itself because it has generated the same number 42
   expect(computer.shotsTaken.length).toBe(2);
   expect(randomComputerMove).not.toBe(secondRandomComputerMove);
+
+  jest.restoreAllMocks();
+});
+
+test("randomMove method hits player1 only ship so areAllShipsSunk() method should report true", () => {
+  const player1 = new CreatePlayer("player1");
+  const computer = new CreatePlayer("computer");
+  const player1Gameboard = new Gameboard();
+  const computerGameboard = new Gameboard();
+  const ship1 = new CreateShip(1);
+
+  jest.spyOn(computer, "getRandomIntegerNumber").mockReturnValueOnce(1);
+
+  player1Gameboard.placeShip(["a1"], ship1);
+
+  const randomComputerMove = computer.randomMove(player1Gameboard);
+
+  expect(player1Gameboard.areAllShipsSunk()).toBe(true);
 
   jest.restoreAllMocks();
 });

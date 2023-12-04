@@ -108,8 +108,6 @@ class CreatePlayer {
     ];
   }
 
-  // its late Friday and this code smells but passes all the recursive tests and the last tests of player1 attacks player2 and vica versa.
-  // 💥 perhaps fresh eyes will refactor this
   attack(coordinates, opponentGameboard) {
     if (this.shotsTaken.includes(coordinates)) {
       return "choose new coordinates";
@@ -127,7 +125,7 @@ class CreatePlayer {
     return true;
   }
 
-  randomMove() {
+  randomMove(opponentGameboard) {
     const randomInteger =
       this.getRandomIntegerNumber(MIN_ARRAY_NUMBER, MAX_ARRAY_NUMBER) - 1;
     const computerRandomMove = this.validMoveArray[randomInteger];
@@ -135,7 +133,7 @@ class CreatePlayer {
     if (this.shotsTaken.includes(computerRandomMove)) {
       return this.randomMove();
     } else {
-      this.attack(computerRandomMove);
+      this.attack(computerRandomMove, opponentGameboard);
       return computerRandomMove;
     }
   }
