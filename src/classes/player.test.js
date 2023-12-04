@@ -129,14 +129,14 @@ test("computer randomMove generates a new coordinate each time it is invoked", (
 });
 
 //so now the tricky one
-xtest("randomMove function re-generates automatically if the co-ordinate has already been used", () => {
+test("randomMove function re-generates automatically if the co-ordinate has already been used", () => {
   const player1 = new CreatePlayer("player1");
   const computer = new CreatePlayer("computer");
   const player1Gameboard = new Gameboard();
   const computerGameboard = new Gameboard();
   const ship1 = new CreateShip(1);
 
-  //using spy to overwrite the randomInteger Value 1st:42, 2nd:42, 3rd:36 - wiht luck it will cause the random move to loop until the 3rd value is entered so i can use toHaveBeenCalled(3) as the matcher
+  //using spy to overwrite the randomInteger Value 1st:42, 2nd:42, 3rd:56 - with luck it will cause the randomMove method to loop until the 3rd value is entered so i can use toHaveBeenCalled(3) as the matcher
   jest
     .spyOn(computer, "getRandomIntegerValue")
     .mockReturnValue(42)
@@ -152,6 +152,7 @@ xtest("randomMove function re-generates automatically if the co-ordinate has alr
   player1Gameboard.receiveAttack(secondRandomComputerMove);
 
   expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(3); // i only call it twice above but expect the function to call itself beacuse it has generated the same number 42
+  expect(computer.shotsTaken.length).toBe(2);
   expect(randomComputerMove).not.toBe(secondRandomComputerMove);
 
   jest.restoreAllMocks();
