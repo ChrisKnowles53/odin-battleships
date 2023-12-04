@@ -81,3 +81,13 @@ test("player1 makes an attack on player2 gameboard and does NOT sink the ship", 
   player1.attack("b1", player1Gameboard);
   expect(player1Gameboard.areAllShipsSunk()).toBe(false);
 });
+
+// The game is played against the computer, so make the ‘computer’ capable of making random plays. The AI does not have to be smart, but it should know whether or not a given move is legal (i.e. it shouldn’t shoot the same coordinate twice).
+//computer as a player
+//   can use same class as player just need to pass in valid coordinates
+//   valid coordinates are A1 to A10 B1 to B10 .... J1 to J10.
+
+test("invoking randomMove() returns true", () => {
+  const computer = new CreatePlayer("computer");
+  expect(computer.randomMove()).toBe(true);
+});
