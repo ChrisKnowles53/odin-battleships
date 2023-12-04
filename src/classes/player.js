@@ -1,3 +1,5 @@
+const MIN_ARRAY_NUMBER = 1;
+const MAX_ARRAY_NUMBER = 100; //10x10grid = 100 possible coordinates
 class CreatePlayer {
   constructor(player) {
     this.name = player;
@@ -126,19 +128,15 @@ class CreatePlayer {
   }
 
   randomMove() {
-    const minArrayNumber = 1;
-    const maxArrayNumber = 100; // 10 by 10 Array
-    const randomInteger = this.getRandomIntegerNumber(
-      minArrayNumber,
-      maxArrayNumber
-    );
+    const randomInteger =
+      this.getRandomIntegerNumber(MIN_ARRAY_NUMBER, MAX_ARRAY_NUMBER) - 1;
     const computerRandomMove = this.validMoveArray[randomInteger];
 
     if (this.shotsTaken.includes(computerRandomMove)) {
       return this.randomMove();
     } else {
       this.attack(computerRandomMove);
-      return computerRandomMove; //true (true is only needed to pass recursive test);
+      return computerRandomMove;
     }
   }
   getRandomIntegerNumber(min, max) {

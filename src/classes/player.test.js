@@ -74,16 +74,6 @@ test("player1 makes an attack on player2 gameboard and does NOT sink the ship", 
   expect(player1Gameboard.areAllShipsSunk()).toBe(false);
 });
 
-// The game is played against the computer, so make the ‘computer’ capable of making random plays. The AI does not have to be smart, but it should know whether or not a given move is legal (i.e. it shouldn’t shoot the same coordinate twice).
-//computer as a player
-//   can use same class as player just need to pass in valid coordinates
-//   valid coordinates are A1 to A10 B1 to B10 .... J1 to J10.
-
-xtest("invoking randomMove() returns true", () => {
-  const computer = new CreatePlayer("computer");
-  expect(computer.randomMove()).toBe(true);
-});
-
 test("randomMove generates a coordinate", () => {
   const computer = new CreatePlayer("computer");
   expect(computer.validMoveArray).toContain(computer.randomMove());
@@ -107,7 +97,7 @@ test("computer randomMove generates a new coordinate each time it is invoked", (
   const computerGameboard = new Gameboard();
   const ship1 = new CreateShip(1);
 
-  //using spy to overwrite the randomInteger Value 1st:42, 2nd:36 - so i can check 2 different shots are not on the ship
+  //using spy to overwrite the randomInteger Value 1st:42, 2nd:36 - so i can check 2 different shots are not on the ship at integer value 0
   jest
     .spyOn(computer, "getRandomIntegerNumber")
     .mockReturnValueOnce(42)
@@ -151,7 +141,7 @@ test("randomMove function re-generates automatically if the co-ordinate has alre
   const secondRandomComputerMove = computer.randomMove();
   player1Gameboard.receiveAttack(secondRandomComputerMove);
 
-  expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(3); // i only call it twice above but expect the function to call itself beacuse it has generated the same number 42
+  expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(3); // i only call it twice above but expect the function to call itself because it has generated the same number 42
   expect(computer.shotsTaken.length).toBe(2);
   expect(randomComputerMove).not.toBe(secondRandomComputerMove);
 
