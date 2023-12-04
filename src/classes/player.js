@@ -126,8 +126,14 @@ class CreatePlayer {
   }
 
   randomMove() {
-    this.validMoveArray[this.getRandomIntegerNumber(1, 100)];
-    return true;
+    const minArrayNumber = 1;
+    const maxArrayNumber = 100; // 10 by 10 Array
+    const computerRandomMove =
+      this.validMoveArray[
+        this.getRandomIntegerNumber(minArrayNumber, maxArrayNumber)
+      ];
+    this.attack(computerRandomMove);
+    return computerRandomMove; //true (true is only needed to pass recursive test);
   }
   getRandomIntegerNumber(min, max) {
     min = Math.ceil(min);

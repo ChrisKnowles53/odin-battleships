@@ -79,7 +79,7 @@ test("player1 makes an attack on player2 gameboard and does NOT sink the ship", 
 //   can use same class as player just need to pass in valid coordinates
 //   valid coordinates are A1 to A10 B1 to B10 .... J1 to J10.
 
-test("invoking randomMove() returns true", () => {
+xtest("invoking randomMove() returns true", () => {
   const computer = new CreatePlayer("computer");
   expect(computer.randomMove()).toBe(true);
 });
@@ -89,10 +89,15 @@ test("randomMove generates a coordinate", () => {
   expect(computer.validMoveArray).toContain(computer.randomMove());
 });
 
-// Then realised how do i check a random number it should be random each time!
-//     so unless i use a mock function to return a set fixed number and then the blow test is not a valid test - back to check the output is contqined within the array
-// realised when creating a random number i should test this function before intergrating it into a test - so x.test is now on hold
-// test("getRandomIntegerNumber(1,3) (min =1 ,max=3) returns the number 1,2 or 3", () => {
-//   const computer = new CreatePlayer("computer");
-//   expect(computer.getRandomIntegerNumber(1, 3)).to;
-// });
+test("computer attacks player1 with a random move", () => {
+  const player1 = new CreatePlayer("player1");
+  const computer = new CreatePlayer("computer");
+  const player1Gameboard = new Gameboard();
+  const computerGameboard = new Gameboard();
+  const ship1 = new CreateShip(1);
+  const computerRandomMove = computer.randomMove();
+  player1Gameboard.placeShip(["a1"], ship1);
+  expect(computer.shotsTaken).toContain(computerRandomMove);
+});
+
+xtest("computer randomMove re-generates if coordinates have already be used", () => {});
