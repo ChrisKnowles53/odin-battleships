@@ -1,11 +1,3 @@
-// Players can take turns playing the game by attacking the enemy Gameboard.
-// first need to make it so we have 2 gameboards: player1 gameboard and player2 gameboard
-
-// discussion with Tom was if we have a class for player that holds name and shots taken we can then use shots taken to validate current move when attacking
-// ✅ first check do we create an object of player
-// it will need a method of attack
-// it will need some way to know whos turn it is - or is this game loop
-
 const CreateShip = require("./ship.js");
 const Gameboard = require("./gameboard.js");
 const CreatePlayer = require("./player.js");
@@ -91,3 +83,16 @@ test("invoking randomMove() returns true", () => {
   const computer = new CreatePlayer("computer");
   expect(computer.randomMove()).toBe(true);
 });
+
+test("randomMove generates a coordinate", () => {
+  const computer = new CreatePlayer("computer");
+  expect(computer.validMoveArray).toContain(computer.randomMove());
+});
+
+// Then realised how do i check a random number it should be random each time!
+//     so unless i use a mock function to return a set fixed number and then the blow test is not a valid test - back to check the output is contqined within the array
+// realised when creating a random number i should test this function before intergrating it into a test - so x.test is now on hold
+// test("getRandomIntegerNumber(1,3) (min =1 ,max=3) returns the number 1,2 or 3", () => {
+//   const computer = new CreatePlayer("computer");
+//   expect(computer.getRandomIntegerNumber(1, 3)).to;
+// });
