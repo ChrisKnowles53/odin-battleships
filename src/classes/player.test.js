@@ -138,7 +138,7 @@ test("randomMove function re-generates automatically if the co-ordinate has alre
 
   //using spy to overwrite the randomInteger Value 1st:42, 2nd:42, 3rd:56 - with luck it will cause the randomMove method to loop until the 3rd value is entered so i can use toHaveBeenCalled(3) as the matcher
   jest
-    .spyOn(computer, "getRandomIntegerValue")
+    .spyOn(computer, "getRandomIntegerNumber")
     .mockReturnValue(42)
     .mockReturnValue(42)
     .mockReturnValue(56); // 42 is e3 and 56 f7
