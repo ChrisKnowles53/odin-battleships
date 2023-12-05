@@ -97,20 +97,17 @@ test("computer randomMove generates a new coordinate each time it is invoked", (
   const computerGameboard = new Gameboard();
   const ship1 = new CreateShip(1);
 
-  //using spy to overwrite the randomInteger Value 1st:42, 2nd:36 - so i can check 2 different shots are not on the ship at integer value 0
+  //using spyOn to overwrite the randomInteger Value 1st:42, 2nd:36 - so i can check 2 different shots are not on the ship at integer value 0
   jest
     .spyOn(computer, "getRandomIntegerNumber")
     .mockReturnValueOnce(42)
     .mockReturnValueOnce(56); // 42 is e3 and 56 f7
 
   player1Gameboard.placeShip(["a1"], ship1);
-
   const randomComputerMove = computer.randomMove();
   player1Gameboard.receiveAttack(randomComputerMove);
-
   const secondRandomComputerMove = computer.randomMove();
   player1Gameboard.receiveAttack(secondRandomComputerMove);
-
   expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(2);
   expect(computer.shotsTaken.length).toBe(2);
   expect(randomComputerMove).not.toBe(secondRandomComputerMove);
@@ -126,7 +123,7 @@ test("randomMove function re-generates automatically if the co-ordinate has alre
   const computerGameboard = new Gameboard();
   const ship1 = new CreateShip(1);
 
-  //using spy to overwrite the randomInteger Value 1st:42, 2nd:42, 3rd:56 - with luck it will cause the randomMove method to loop until the 3rd value is entered so i can use toHaveBeenCalled(3) as the matcher
+  //using spyOn to overwrite the randomInteger Value 1st:42, 2nd:42, 3rd:56 - with luck it will cause the randomMove method to loop until the 3rd value is entered so i can use toHaveBeenCalled(3) as the matcher
   jest
     .spyOn(computer, "getRandomIntegerNumber")
     .mockReturnValueOnce(42)
@@ -134,11 +131,8 @@ test("randomMove function re-generates automatically if the co-ordinate has alre
     .mockReturnValueOnce(56); // 42 is e3 and 56 f7
 
   player1Gameboard.placeShip(["a1"], ship1);
-
   const randomComputerMove = computer.randomMove(player1Gameboard);
-
   const secondRandomComputerMove = computer.randomMove(player1Gameboard);
-
   expect(computer.getRandomIntegerNumber).toHaveBeenCalledTimes(3); // i only call it twice above but expect the function to call itself because it has generated the same number 42
   expect(computer.shotsTaken.length).toBe(2);
   expect(randomComputerMove).not.toBe(secondRandomComputerMove);
@@ -156,9 +150,7 @@ test("randomMove method hits player1 only ship so areAllShipsSunk() method shoul
   jest.spyOn(computer, "getRandomIntegerNumber").mockReturnValueOnce(1);
 
   player1Gameboard.placeShip(["a1"], ship1);
-
-  const randomComputerMove = computer.randomMove(player1Gameboard);
-
+  computer.randomMove(player1Gameboard);
   expect(player1Gameboard.areAllShipsSunk()).toBe(true);
 
   jest.restoreAllMocks();
