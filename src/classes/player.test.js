@@ -97,7 +97,7 @@ test("computer randomMove generates a new coordinate each time it is invoked", (
   const computerGameboard = new Gameboard();
   const ship1 = new CreateShip(1);
 
-  //using spyOn to overwrite the randomInteger Value 1st:42, 2nd:36 - so i can check 2 different shots are not on the ship at integer value 0
+  //using spyOn to overwrite the randomInteger Value 1st:42, 2nd:56 - so i can check 2 different shots are not on the ship at integer value 0
   jest
     .spyOn(computer, "getRandomIntegerNumber")
     .mockReturnValueOnce(42)
